@@ -3,7 +3,7 @@ class Config:
     fileNamePrefix = 'instance'
     fileNameExtension = 'dat'
     numInstances = 10
-    minDepartments = 8
-    maxDepartments = 20
+    minDepartments = 1
+    maxDepartments = 3
     minMembers = 10
-    maxMembers = 20
+    maxMembers = 13

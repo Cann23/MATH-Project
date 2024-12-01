@@ -1,7 +1,6 @@
 
 import os
 import random
-from validate import is_valid
 
 class InstanceGenerator:
     def __init__(self, config):
@@ -18,6 +17,8 @@ class InstanceGenerator:
         minMembers = self.config.minMembers
         maxMembers = self.config.maxMembers
 
+        #validate config
+
         if not os.path.isdir(instancesDirectory):
             os.makedirs(instancesDirectory)
 
@@ -25,31 +26,23 @@ class InstanceGenerator:
             N = random.randint(minMembers, maxMembers)
             D = random.randint(minDepartments, maxDepartments)
             # sum of n should be less than or equal to N
-            n = []
-            remaining = N
-            for i in range(D):
-                value = random.randint(1, min(remaining, maxMembers))  # Random value, but cannot exceed remaining or maxMembers
-                n.append(value)
-                remaining -= value
+            d = list(range(1, D + 1))
+            # size of D must be equal to N add random numbers to d
+            for j in range(N - D):
+                d.append(random.randint(1, D))
+            d.sort()
+            # find the number of members in each department
+            members = [d.count(j) for j in range(1, D + 1)]
 
-            # If remaining > 0, you can either:
-            # 1. Distribute the remaining members randomly across the departments
-            # 2. Leave the remaining members as zero (or handle as needed)
-            if remaining > 0:
-                for i in range(remaining):
-                    n[random.randint(0, D-1)] += 1  # Randomly distribute remaining members to departments
-
-
-            d = [random.randint(1, D) for _ in range(N)]
-            m = [[random.uniform(0, 1) if i != j else 1.0 for j in range(N)] for i in range(N)]
+            n = [random.randint(1, members[i]) for i in range(D)]
+            m = [[random.uniform(0, 1) if k != j else 1.0 for j in range(N)] for k in range(N)]
 
             instance = {
                 'D': D,
                 'N': N,
                 'n': n,
                 'd': d,
-                'm': m
-            }
+                'm': m            }
 
             instancePath = os.path.join(instancesDirectory, f'{fileNamePrefix}_{i}.{fileNameExtension}')
             self.save_instance(instance, instancePath)
