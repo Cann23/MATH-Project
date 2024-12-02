@@ -8,7 +8,8 @@ def main():
     
     try:
         generator.generate()
-        print(f"{config.numInstances} instance başarıyla '{config.instancesDirectory}' dizinine oluşturuldu.")
+        #english print
+        print(f"{config.numInstances} instance(s) successfully created in '{config.instancesDirectory}' directory.")
     except Exception as e:
         print(f"Error: {e}")
 
