@@ -25,16 +25,14 @@ class InstanceGenerator:
         for i in range(numInstances):
             N = random.randint(minMembers, maxMembers)
             D = random.randint(minDepartments, maxDepartments)
-            # sum of n should be less than or equal to N
-            d = list(range(1, D + 1))
-            # size of D must be equal to N add random numbers to d
-            for j in range(N - D):
-                d.append(random.randint(1, D))
+
+            d = [random.randint(1, D) for _ in range(N)]
+
             d.sort()
             # find the number of members in each department
             members = [d.count(j) for j in range(1, D + 1)]
 
-            n = [random.randint(1, members[i]) for i in range(D)]
+            n = [random.randint(1, members[i]) if members[i] > 0 else 0 for i in range(D)]
             m = [[random.uniform(0, 1) if k != j else 1.0 for j in range(N)] for k in range(N)]
 
             instance = {
