@@ -4,41 +4,35 @@ import time
 from common import read_data
 
 def greedy_construction(D, n, N, d, m):
-    selected = []
-    department_count = {dept: 0 for dept in range(1, D + 1)}
+    partial_solution = []
+    department_participantCount = {department: 0 for department in range(1, D + 1)}
 
-    members = sorted(range(N), key=lambda i: -sum(m[i]))
+    # calculate the sum of the compatibilities of each member
+    compatibilities = [sum(m[i]) for i in range(N)]
+    # sort the members in decreasing order of their sum of compatibilities
+    members = sorted(range(N), key=lambda i: compatibilities[i], reverse=True)
 
     for member in members:
-        dept = d[member]
+        department = d[member]
 
-        if department_count[dept] < n[dept - 1]:
-            # Check feasibility of adding this member
-            if all(m[member][other] > 0 for other in selected) and all(
+        # Check if the department has reached its limit (constraint 1)
+        if department_participantCount[department] < n[department - 1]:
+            # Check compatibility with the partial_solution members (constraint 3 and 4)
+            if all(m[member][other] > 0 for other in partial_solution) and all(
                 m[member][other] >= 0.15 or
-                any(m[member][k] > 0.85 and m[k][other] > 0.85 for k in selected)
-                for other in selected
+                any(m[member][k] > 0.85 and m[k][other] > 0.85 for k in partial_solution)
+                for other in partial_solution
             ):
-                selected.append(member)
-                department_count[dept] += 1
+                partial_solution.append(member)
+                department_participantCount[department] += 1
 
-        # If the algorithm cannot find enough participants for a department
-        if department_count[dept] < n[dept - 1] and not any(
-            all(m[cand][other] > 0 for other in selected) and all(
-                m[cand][other] >= 0.15 or
-                any(m[cand][k] > 0.85 and m[k][other] > 0.85 for k in selected)
-                for other in selected
-            ) for cand in range(N) if d[cand] == dept
-        ):
-            print(f"No feasible solution for department {dept}.")
-            return None
-
-        if len(selected) == sum(n):
+        # Check if a complete solution is found (constraint 2)
+        if len(partial_solution) == sum(n):
             break
 
-    # Check if a complete solution is found
-    if len(selected) < sum(n):
+    # Check if a feasible solution is found
+    if len(partial_solution) < sum(n):
         print("No feasible solution for the problem.")
         return None
 
-    return selected
+    return partial_solution
