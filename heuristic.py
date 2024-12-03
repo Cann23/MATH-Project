@@ -68,7 +68,7 @@ def main():
                     objective = calculate_objective(D, n, N, d, m, result)
                     result = [x + 1 for x in result]
                     print(f"Objective value for {instance}:", objective)
-                print(f"Selected members for {instance}:", result)
+                    print(f"Selected members for {instance}:", result)
 
             elif args.algorithm == 'local_search':
                 result = greedy_construction(D, n, N, d, m)
