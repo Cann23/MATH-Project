@@ -167,3 +167,4 @@ cython_debug/
 
 #ignore the generated files
 instanceGenerator/output/
+heuristics/result.txt
