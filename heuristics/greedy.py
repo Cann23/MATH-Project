@@ -17,7 +17,7 @@ def greedy_construction(D, n, N, d, m):
 
         # Check if the department has reached its limit (constraint 1)
         if department_participantCount[department] < n[department - 1]:
-            # Check compatibility with the partial_solution members (constraint 3 and 4)
+            # Check compatibility with the partial_solution members (constraint 2 and 3)
             if all(m[member][other] > 0 for other in partial_solution) and all(
                 m[member][other] >= 0.15 or
                 any(m[member][k] > 0.85 and m[k][other] > 0.85 for k in partial_solution)
@@ -26,7 +26,7 @@ def greedy_construction(D, n, N, d, m):
                 partial_solution.append(member)
                 department_participantCount[department] += 1
 
-        # Check if a complete solution is found (constraint 2)
+        # Check if a complete solution is found (constraint 1)
         if len(partial_solution) == sum(n):
             break
 
