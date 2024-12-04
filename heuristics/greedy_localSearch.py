@@ -9,14 +9,21 @@ def local_search(D, n, N, d, m, solution):
     best_objective = calculate_objective(D, n, N, d, m, best_solution)
     is_improved = True
 
-    # Local search loop
+    # Local search loop - reassignment neighborhood (one element exchange)
     while is_improved:
         is_improved = False
         for i in range(len(solution)):
-            for j in range(i + 1, len(solution)):
-                # for finding neighbor solution swap members i and j in the solution 
+            current_member = best_solution[i]
+            current_department = d[current_member]
+
+            for j in range(N):
+                # Check if the member is in the solution or belongs to the same department
+                if j in best_solution or d[j] != current_department:
+                    continue
+                
+                # Create a new solution by replacing the current member with j
                 new_solution = best_solution[:]
-                new_solution[i], new_solution[j] = new_solution[j], new_solution[i]
+                new_solution[i] = j
 
                 # check the new solution is feasible
                 if is_feasible(D, n, N, d, m, new_solution):
