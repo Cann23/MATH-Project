@@ -2,7 +2,7 @@ import random
 import numpy as np
 import time
 
-from common import read_data, calculate_objective
+from common import read_data, calculate_objective, is_feasible
 
 # Local search function (reuse the one from previous code)
 def local_search(D, n, N, d, m, selected):
@@ -24,30 +24,6 @@ def local_search(D, n, N, d, m, selected):
                             best_solution = new_solution
                             improved = True
     return best_solution  # Move this outside the while loop
-
-
-# Feasibility check for the solution
-def is_feasible(D, n, N, d, m, solution):
-    # check if the size of selected members is correct
-    if len(solution) != sum(n):
-        return False
-    
-    # check if the number of members in each department is correct
-    department_count = {dept: 0 for dept in range(1, D + 1)}
-    for member in solution:
-            dept = d[member]
-            department_count[dept] += 1
-            if department_count[dept] < n[dept - 1]:
-                # Check feasibility
-                if not all(m[member][other] > 0 for other in solution) and all(
-                    m[member][other] >= 0.15 or
-                    any(m[member][k] > 0.85 and m[k][other] > 0.85 for k in solution)
-                    for other in solution
-                ):
-                    return False
-            else:
-                return False
-    return True
 
 # Greedy construction phase with randomization
 def greedy_construction_grasp(D, n, N, d, m, alpha=0.2):
