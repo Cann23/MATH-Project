@@ -38,15 +38,12 @@ subject to {
 forall(p in 1..D)
     sum(i in 1..N: p == d[i]) x[i] == n[p];
 
-// constraint 2 - required number of participants and selected members must be equal
-sum(i in 1..N) x[i] == numberOfTotalParticipants;
-
-// constraint 3 - zero compatibility should be forbidden. 
+// constraint 2 - zero compatibility should be forbidden. 
 // If their compatibility is zero, then they cannot be selected together.
 forall(i in 1..N, j in i+1..N : m[i][j] == 0)
     x[i] + x[j] <= 1;
 
-// constraint 4 - if 0 < m[i][j] < 0.15, then there must be a third participant
+// constraint 3 - if 0 < m[i][j] < 0.15, then there must be a third participant
 // in the commission k such that m[i][k] > 0.85 and m[k][j] > 0.85
 forall(i in 1..N, j in i+1..N : 0 < m[i][j] && m[i][j] < 0.15)
     x[i] + x[j] <= 1 + sum(k in 1..N: m[i][k] > 0.85 && m[k][j] > 0.85) x[k];
