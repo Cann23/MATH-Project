@@ -7,6 +7,7 @@ class InstanceGenerator:
         self.config = config
 
     def generate(self):
+        # Get the configuration values
         instancesDirectory = self.config.instancesDirectory
         fileNamePrefix = self.config.fileNamePrefix
         fileNameExtension = self.config.fileNameExtension
@@ -17,22 +18,22 @@ class InstanceGenerator:
         minMembers = self.config.minMembers
         maxMembers = self.config.maxMembers
 
-        #validate config
-
         if not os.path.isdir(instancesDirectory):
             os.makedirs(instancesDirectory)
 
+        # Generate the instances
         for i in range(numInstances):
             N = random.randint(minMembers, maxMembers)
             D = random.randint(minDepartments, maxDepartments)
 
+            # randomly assign departments to members
             d = [random.randint(1, D) for _ in range(N)]
-
+            # sort the departments
             d.sort()
             # find the number of members in each department
             members = [d.count(j) for j in range(1, D + 1)]
-
-            n = [random.randint(1, members[i]) if members[i] > 0 else 0 for i in range(D)]
+            # randomly select comission members
+            n = [random.randint(0, members[i]) if members[i] > 0 else 0 for i in range(D)]
             m = [[random.uniform(0, 1) if k != j else 1.0 for j in range(N)] for k in range(N)]
 
             instance = {
@@ -41,13 +42,14 @@ class InstanceGenerator:
                 'n': n,
                 'd': d,
                 'm': m            }
-
+            # Save the instance to a file
             instancePath = os.path.join(instancesDirectory, f'{fileNamePrefix}_{i}.{fileNameExtension}')
             self.save_instance(instance, instancePath)
                 
 
     def save_instance(self, instance, path):
         D, N, n, d, m = instance['D'], instance['N'], instance['n'], instance['d'], instance['m']
+        # Write the instance to a file
         with open(path, 'w') as f:
              #replace all ',' with ''
                 n = str(n).replace(',', '')
