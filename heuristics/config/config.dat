@@ -27,3 +27,6 @@ max_time=300
 
 # Maximum number of iterations for the algorithm
 max_iterations=100
+
+# Tune mode: Tune the alpha by inrementing alpha from alpha_start to alpha_end by alpha_step
+tune=False

@@ -5,7 +5,7 @@ algorithm=local_search
 input_file=data/project.1.dat
 
 # Path to the output file where the solution will be saved
-solution_file=output.sol
+solution_file=output_local_search.sol
 
 # Verbose mode: set to True for detailed output, False for minimal output
 verbose=False
@@ -27,3 +27,6 @@ max_time=300
 
 # Maximum number of iterations for the algorithm
 max_iterations=100
+
+# Tune mode: Tune the alpha by inrementing alpha from alpha_start to alpha_end by alpha_step
+tune=False

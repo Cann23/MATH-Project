@@ -71,7 +71,38 @@ def main():
             solution, objective = local_search(D, n, N, d, m, solution)
 
     elif config["algorithm"] == 'grasp':
-        solution, objective = grasp(D, n, N, d, m, iterations=config["max_iterations"], alpha=config["alpha"])
+        if config["tune"]:
+            # Tune the alpha parameter
+            objective=0.0
+            alpha_start=config["alpha_start"]
+            alpha_end=config["alpha_end"]
+            alpha_step=config["alpha_step"]
+            best_alpha = None
+            for alpha in np.arange(alpha_start, alpha_end, alpha_step):
+                time_alpha_start = time.time()
+                current_solution, current_objective = grasp(D, n, N, d, m, iterations=config["max_iterations"], alpha=alpha)
+                #print solution objective and alpha seperatly lines
+                if config["verbose"]:
+                    print("Alpha:", alpha)
+                    print("Objective:", current_objective)
+                    print("Solution:", current_solution)
+                
+                #adding epsilon to objective to avoid floating point errors
+                if current_objective - objective > 1e-6:
+                    best_alpha = alpha
+                    objective = current_objective
+                    solution = current_solution
+                time_alpha_end = time.time()
+                elapsed_time_alpha = time_alpha_end - time_alpha_start
+                if config["verbose"]:
+                    print("Elapsed Time:", elapsed_time_alpha, "seconds")
+                    print("\n")
+            if config["verbose"]:
+                print("Best Alpha:", best_alpha)
+                print("Best Objective:", objective)
+                print("Best Solution:", solution)
+        else:
+            solution, objective = grasp(D, n, N, d, m, iterations=config["max_iterations"], alpha=config["alpha"])
 
 
     end_time = time.time()  # End time measurement
