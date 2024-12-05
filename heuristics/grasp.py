@@ -51,7 +51,7 @@ def greedy_construction_grasp(D, n, N, d, m, alpha=0.2):
     return partial_solution
 
 # GRASP main function
-def grasp(D, n, N, d, m, iterations=100, alpha=0.2):
+def grasp(D, n, N, d, m, iterations=100, alpha=0.5):
     best_solution = None
     best_objective = -float('inf')
 
