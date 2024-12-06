@@ -69,7 +69,7 @@ def main():
     elif config["algorithm"] == 'local_search':
         solution = greedy_construction(D, n, N, d, m)
         if solution is not None:
-            solution, objective = local_search(m, solution)
+            solution, objective = local_search(D, n, N, d, m, solution)
 
     elif config["algorithm"] == 'grasp':
         if config["tune"]:
