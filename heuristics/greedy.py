@@ -1,8 +1,3 @@
-import numpy as np
-import time
-
-from common import read_data
-
 def greedy_construction(D, n, N, d, m):
     partial_solution = []
     department_participantCount = {department: 0 for department in range(1, D + 1)}

@@ -1,5 +1,7 @@
 import random
+
 from greedy_localSearch import local_search
+
 
 # Greedy construction phase with randomization
 def greedy_construction_grasp(D, n, N, d, m, alpha=0.2):

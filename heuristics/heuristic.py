@@ -1,13 +1,14 @@
+import argparse
 import os
 import time
-import argparse
-import numpy as np
-import re
 
+import numpy as np
+
+from common import read_data, calculate_objective
+from grasp import grasp
 from greedy import greedy_construction
 from greedy_localSearch import local_search
-from grasp import grasp
-from common import read_data, calculate_objective
+
 
 # Function to parse the command-line argument
 def parse_args():
@@ -63,12 +64,12 @@ def main():
     if config["algorithm"] == 'greedy':
         solution = greedy_construction(D, n, N, d, m)
         if solution is not None:
-            objective = calculate_objective(D, n, N, d, m, solution)
+            objective = calculate_objective(m, solution)
 
     elif config["algorithm"] == 'local_search':
         solution = greedy_construction(D, n, N, d, m)
         if solution is not None:
-            solution, objective = local_search(D, n, N, d, m, solution)
+            solution, objective = local_search(m, solution)
 
     elif config["algorithm"] == 'grasp':
         if config["tune"]:

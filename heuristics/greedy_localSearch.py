@@ -1,12 +1,9 @@
-import numpy as np
-import time
-
-from common import read_data, calculate_objective, is_feasible
+from common import calculate_objective, is_feasible
 
 def local_search(D, n, N, d, m, solution):
     # Initialize the best solution and objective
     best_solution = solution
-    best_objective = calculate_objective(D, n, N, d, m, best_solution)
+    best_objective = calculate_objective(m, best_solution)
     is_improved = True
 
     # Local search loop - reassignment neighborhood (one element exchange)
@@ -28,7 +25,7 @@ def local_search(D, n, N, d, m, solution):
                 # check the new solution is feasible
                 if is_feasible(D, n, N, d, m, new_solution):
                     # Check the new objective
-                    new_objective = calculate_objective(D, n, N, d, m, new_solution)
+                    new_objective = calculate_objective(m, new_solution)
 
                     if new_objective > best_objective:
                         best_solution = new_solution

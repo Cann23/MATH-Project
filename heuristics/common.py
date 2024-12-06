@@ -1,5 +1,5 @@
 import numpy as np
-import time
+
 
 # read the data from the file
 def read_data(filename):
@@ -26,7 +26,7 @@ def read_data(filename):
     return D, n, N, d, m
 
 # calculate the objective value
-def calculate_objective(D, n, N, d, m, selected):
+def calculate_objective(m, selected):
     number_of_members = len(selected)
     number_of_pairs = number_of_members * (number_of_members - 1) // 2
     objective = sum(m[i][j] for i in selected for j in selected if i < j) / number_of_pairs
