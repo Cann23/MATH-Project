@@ -2,7 +2,7 @@
 algorithm=grasp
 
 # Path to the input file containing problem instance data
-input_file=data/project.1.dat
+input_file=data/project.0.dat
 
 # Path to the output file where the solution will be saved
 solution_file=output_grasp.sol
@@ -29,4 +29,4 @@ max_time=300
 max_iterations=100
 
 # Tune mode: Tune the alpha by inrementing alpha from alpha_start to alpha_end by alpha_step 
-tune=True
+tune=False

@@ -43,7 +43,7 @@ class InstanceGenerator:
                 'd': d,
                 'm': m            }
             # Save the instance to a file
-            instancePath = os.path.join(instancesDirectory, f'{fileNamePrefix}_{i}.{fileNameExtension}')
+            instancePath = os.path.join(instancesDirectory, f'{fileNamePrefix}{i}.{fileNameExtension}')
             self.save_instance(instance, instancePath)
                 
 
