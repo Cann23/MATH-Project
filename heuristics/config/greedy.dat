@@ -2,10 +2,10 @@
 algorithm=greedy
 
 # Path to the input file containing problem instance data
-input_file=data/project.15.dat
+input_file=data/project.30.dat
 
 # Path to the output file where the solution will be saved
-solution_file=output_greedy.15.sol
+solution_file=output_greedy.30.sol
 
 # Verbose mode: set to True for detailed output, False for minimal output
 verbose=True

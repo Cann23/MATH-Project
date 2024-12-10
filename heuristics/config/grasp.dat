@@ -2,10 +2,10 @@
 algorithm=grasp
 
 # Path to the input file containing problem instance data
-input_file=data/project.0.dat
+input_file=data/project.30.dat
 
 # Path to the output file where the solution will be saved
-solution_file=output_grasp.sol
+solution_file=output_grasp.30.sol
 
 # Verbose mode: set to True for detailed output, False for minimal output
 verbose=True
