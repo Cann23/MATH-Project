@@ -57,9 +57,10 @@ def grasp(D, n, N, d, m, iterations=100, alpha=0.5):
     best_solution = None
     best_objective = -float('inf')
 
-    for _ in range(iterations):
+    for i in range(iterations):
         # Greedy construction phase with randomness
-        initial_solution = greedy_construction_grasp(D, n, N, d, m, alpha)
+        # Force first iteration as a greedy execution (alpha == 0)
+        initial_solution = greedy_construction_grasp(D, n, N, d, m, 0 if i == 0 else alpha)
 
         # Check if the solution is feasible
         if initial_solution is None:

@@ -79,7 +79,7 @@ def main():
             alpha_end=config["alpha_end"]
             alpha_step=config["alpha_step"]
             best_alpha = None
-            for alpha in np.arange(alpha_start, alpha_end, alpha_step):
+            for alpha in np.arange(alpha_start, alpha_end + alpha_step, alpha_step):
                 time_alpha_start = time.time()
                 current_solution, current_objective = grasp(D, n, N, d, m, iterations=config["max_iterations"], alpha=alpha)
                 #print solution objective and alpha seperatly lines
