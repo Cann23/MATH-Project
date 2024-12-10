@@ -22,8 +22,6 @@ alpha_step=0.1
 # Fixed alpha value used in GRASP if tuning is not needed
 alpha=0.5
 
-# Maximum time (in seconds) to run the algorithm
-max_time=300
 
 # Maximum number of iterations for the algorithm
 max_iterations=100
