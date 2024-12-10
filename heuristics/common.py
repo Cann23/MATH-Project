@@ -38,9 +38,7 @@ def is_feasible(D, n, N, d, m, solution):
         return False
     
     # check if the number of members in each department is correct (Constraint 1)
-    department_participantCount = {department: 0 for department in range(1, D + 1)}
     for member in solution:
-            department = d[member]
             # Check feasibility (Constraint 3 and 4)
             if not (all(m[member][other] > 0 for other in solution) or all(
                 m[member][other] >= 0.15 or
