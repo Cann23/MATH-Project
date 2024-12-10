@@ -1,0 +1,3 @@
+OBJECTIVE: 0.58
+Commission: 1 11 15 16 17 18 24 25 27 34
+Elapsed Time: 0.000926971435546875 seconds
