@@ -112,7 +112,7 @@ def main():
     #sort the solution
     if solution is not None:
         # Make objective 2 decimal places
-        objective = round(objective, 2)
+        #objective = round(objective, 2)
         solution = [x + 1 for x in solution] # Convert the solution to 1-based index
         solution.sort()
     # Write the solution to the output file
@@ -122,6 +122,8 @@ def main():
             f.write("OBJECTIVE: " + str(objective) + "\n")
             f.write("Commission: ")
             f.write(" ".join(str(x) for x in solution))
+            f.write("\n")
+            f.write("Elapsed Time: " + str(elapsed_time) + " seconds")
         #close the file
         f.close()
 
