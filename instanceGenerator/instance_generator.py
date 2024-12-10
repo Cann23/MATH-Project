@@ -22,7 +22,8 @@ class InstanceGenerator:
             os.makedirs(instancesDirectory)
 
         # Generate the instances
-        for i in range(numInstances):
+        i=0
+        while i<numInstances:
             N = random.randint(minMembers, maxMembers)
             D = random.randint(minDepartments, maxDepartments)
 
@@ -41,6 +42,9 @@ class InstanceGenerator:
                 continue
 
             m = [[random.uniform(0, 1) if k != j else 1.0 for j in range(N)] for k in range(N)]
+            for k in range(N):
+                for j in range(k, N):
+                    m[j][k] = m[k][j]
 
             instance = {
                 'D': D,
@@ -51,6 +55,7 @@ class InstanceGenerator:
             # Save the instance to a file
             instancePath = os.path.join(instancesDirectory, f'{fileNamePrefix}{i}.{fileNameExtension}')
             self.save_instance(instance, instancePath)
+            i = i+1
                 
 
     def save_instance(self, instance, path):
